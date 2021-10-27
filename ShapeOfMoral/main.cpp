@@ -41,7 +41,8 @@ void main()                                                     \n\
 }                                                               \n\
 ";
 
-void CreateTriangle() {
+void CreateTriangle()
+{
     GLfloat vertices[] =
     {
         -1.0f, -1.0f, 0.0f,
@@ -64,7 +65,8 @@ void CreateTriangle() {
     glBindVertexArray(0);
 }
 
-void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) {
+void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType)
+{
     GLuint theShader = glCreateShader(shaderType);
     const GLchar* theCode[1];
     theCode[0] = shaderCode;
@@ -79,7 +81,8 @@ void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) {
     GLchar elog[1024] = { 0 };
     
     glGetShaderiv(theShader, GL_COMPILE_STATUS, &result);
-    if(!result) {
+    if(!result)
+    {
         glGetShaderInfoLog(theShader, sizeof(elog), NULL, elog);
         printf("Error compiler the %d shader: '%s'\n", shaderType, elog);
         return;
@@ -87,10 +90,12 @@ void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) {
     glAttachShader(theProgram, theShader);
 }
 
-void CompileShaders() {
+void CompileShaders()
+{
     shader = glCreateProgram();
     
-    if(!shader) {
+    if(!shader)
+    {
         printf("Error Creating Shader Program!\n");
         return;
     }
@@ -104,7 +109,8 @@ void CompileShaders() {
     glLinkProgram(shader);
     glGetProgramiv(shader, GL_LINK_STATUS, &result);
     
-    if(!result) {
+    if(!result)
+    {
         glGetProgramInfoLog(shader, sizeof(elog), NULL, elog);
         printf("Error linking program: '%s'\n", elog);
         return;
@@ -113,7 +119,8 @@ void CompileShaders() {
     glValidateProgram(shader);
     glGetProgramiv(shader, GL_VALIDATE_STATUS, &result);
     
-    if(!result) {
+    if(!result)
+    {
         glGetProgramInfoLog(shader, sizeof(elog), NULL, elog);
         printf("Error validating program : %s\n", elog);
         return;
@@ -122,8 +129,10 @@ void CompileShaders() {
     uniformModel = glGetUniformLocation(shader, "model");
 }
 
-int main() {
-    if(!glfwInit()) {
+int main()
+{
+    if(!glfwInit())
+    {
         printf("GLFW Installation Failed");
         glfwTerminate();
         return -1;
@@ -136,7 +145,8 @@ int main() {
 
     GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Shape of Moral.", NULL, NULL);
 
-    if(!mainWindow) {
+    if(!mainWindow)
+    {
         glfwTerminate();
         return -1;
     }
@@ -148,7 +158,8 @@ int main() {
     
     glewExperimental = GL_TRUE;
     
-    if(glewInit() != GLEW_OK) {
+    if(glewInit() != GLEW_OK)
+    {
         printf("GLEW Installation Failed.");
         glfwDestroyWindow(mainWindow);
         glfwTerminate();
@@ -160,7 +171,8 @@ int main() {
     CreateTriangle();
     CompileShaders();
     
-    while(!glfwWindowShouldClose(mainWindow)) {
+    while(!glfwWindowShouldClose(mainWindow))
+    {
         glfwPollEvents();
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
