@@ -23,7 +23,8 @@ layout (location = 0) in vec3 pos;                              \n\
                                                                 \n\
 uniform mat4 model;                                             \n\
                                                                 \n\
-void main() {                                                   \n\
+void main()                                                     \n\
+{                                                               \n\
     gl_Position = model * vec4(pos, 1.0);                       \n\
 }                                                               \n\
 ";
